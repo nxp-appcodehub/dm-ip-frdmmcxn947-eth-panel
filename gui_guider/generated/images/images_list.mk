@@ -1,0 +1,1 @@
+GEN_CSRCS += _Slide2_480x320.c

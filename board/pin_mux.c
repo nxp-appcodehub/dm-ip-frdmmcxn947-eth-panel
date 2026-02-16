@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 NXP
+ * Copyright 2022-2025 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -223,7 +223,7 @@ void BOARD_InitADCTemperature(void)
 		kPORT_PassiveFilterDisable,
 		kPORT_OpenDrainDisable,
 		kPORT_LowDriveStrength,
-		kPORT_PinDisabledOrAnalog,
+		kPORT_MuxAlt0,
 		kPORT_InputBufferEnable,
 		kPORT_InputNormal,
 		kPORT_UnlockRegister
@@ -279,7 +279,7 @@ void BOARD_InitADC(void)
 		kPORT_PassiveFilterDisable,
 		kPORT_OpenDrainDisable,
 		kPORT_LowDriveStrength,
-		kPORT_PinDisabledOrAnalog,
+		kPORT_MuxAlt0,
 		kPORT_InputBufferDisable,
 		kPORT_InputNormal,
 		kPORT_UnlockRegister

@@ -26,7 +26,7 @@
 #include "fsl_enet.h"
 #include "fsl_phylan8741.h"
 
-#include "include/lwip/sockets.h"
+#include "lwip/sockets.h"
 
 #include "semphr.h"
 

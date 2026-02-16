@@ -7,7 +7,7 @@ Industrial connectivity panel is a improved version, with new features, improved
 #### Boards: FRDM-MCXN947
 #### Categories: HMI, Industrial, Graphics, Motor Control, Communication
 #### Peripherals: GPIO, I2C, USB, CAN, Ethernet, FLEXIO, ENC, PWM 
-#### Toolchains: MCUXpresso IDE, VS Code
+#### Toolchains: VS Code
 
 ## Table of Contents
 1. [Software](#step1)
@@ -17,9 +17,9 @@ Industrial connectivity panel is a improved version, with new features, improved
 4. [Release Notes](#step5)
 
 ## 1. Software<a name="step1"></a>
-- [MCUXpresso 22.12.148 or newer](https://nxp.com/mcuxpresso)
-- [MCUXpresso for VScode 24.12.71 or newer](https://www.nxp.com/design/design-center/software/embedded-software/mcuxpresso-for-visual-studio-code:MCUXPRESSO-VSC)
-- FRDM-MCXN947 SDK 24.12.00
+- [VSCode (1.107.0)](https://code.visualstudio.com/)
+- [MCUXpresso for VSCode extension (25.11.16)](https://marketplace.visualstudio.com/items?itemName=NXPSemiconductors.mcuxpresso)
+- [SDK version 25.12.0](https://github.com/nxp-mcuxpresso/mcuxsdk-core)
 
 ## 2. Hardware (Each Panel)<a name="step2"></a>
 - [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947)
@@ -46,34 +46,26 @@ Industrial connectivity panel is a improved version, with new features, improved
 Plug components as image bellow
 [<p align="center"><img src="Media/IndustrialPanelV2_MCXN947_Plug.png" width="800"/></p>](Media/IndustrialPanelV2_MCXN947_Plug.png)
 
-### 3.3 Install SDK of FRDM board on MCUXpresso
-1. Open SDK Installer in MCUXpresso
-[<p align="center"><img src="Media/InstallSDK/step1.png" width="600"/></p>](Media/InstallSDK/step1.png)
-2. Search and select board, then click install
-[<p align="center"><img src="Media/InstallSDK/step2.png" width="600"/></p>](Media/InstallSDK/step2.png)
+### 3.3 Prepare before import code
+1. [Install VSCode.](https://www.nxp.com/design/design-center/training/TIP-GETTING-STARTED-WITH-MCUXPRESSO-FOR-VS-CODE)
+2. [Install MCUXpresso for VSCode extension.](https://www.nxp.com/design/design-center/training/TIP-GETTING-STARTED-WITH-MCUXPRESSO-FOR-VS-CODE)
+3. [Import SDK repository (Import could be take about an hour).](https://www.nxp.com/design/design-center/training/TIP-GETTING-STARTED-WITH-MCUXPRESSO-FOR-VS-CODE)
+    - Open MCUXpresso for VSCode extension.
+    - In Quick Start Panel window click in Import Repository.
+    - Select MCUXpresso SDK repository.
+    - Select main revision or specific if is needed.
+    - Select save location.
+    - Click import.
+    - Import could be take about an hour.
 
-### 3.4 Add Motor Control Libraries
-1. Open Git Bash in path of workspace.
-2. Use next commands in Git Bash.
+### 3.4 Import example from Application Code Hub
+1. Open MCUXpresso for VSCode extension.
+2. In Quick Start Panel window click in Application Code Hub.
+3. In Search text field, type the name of desired example.
+4. Select example, put some name for save the example, and the directory where the example will be saved.
+5. Click in Import Project and wait few seconds.
 
-        git clone https://github.com/nxp-mcuxpresso/rtcesl.git
-        git clone https://github.com/nxp-mcuxpresso/mcux-motor_control.git
-
-### 3.5 Import project from Application Code Hub
-1. Open import poject of Application Code Hub Manager
-[<p align="center"><img src="Media/StepsToImportACHToMCUXpresso/step1.png" width="600"/></p>](Media/StepsToImportACHToMCUXpresso/step1.png)
-2. Select desired example
-[<p align="center"><img src="Media/StepsToImportACHToMCUXpresso/step2.png" width="600"/></p>](Media/StepsToImportACHToMCUXpresso/step2.png)
-3. Click on "GitHub link" option to import and then click next
-[<p align="center"><img src="Media/StepsToImportACHToMCUXpresso/step3.png" width="600"/></p>](Media/StepsToImportACHToMCUXpresso/step3.png)
-4. Select desired branch and then click next
-[<p align="center"><img src="Media/StepsToImportACHToMCUXpresso/step4.png" width="600"/></p>](Media/StepsToImportACHToMCUXpresso/step4.png)
-5. Modify destination path to be the same as motor control libaries, then click next
-[<p align="center"><img src="Media/StepsToImportACHToMCUXpresso/step5.png" width="600"/></p>](Media/StepsToImportACHToMCUXpresso/step5.png)
-6. Click next
-7. Click finish
-
-### 3.6 Setup code
+### 3.5 Setup code
 1. Configure Master, Interface mode, Automatic or Manual IP configuration and StandBy enable.
     1. On file screen/screen_app.h are three macros.
 
@@ -87,17 +79,35 @@ Plug components as image bellow
         - STAND_BY_ENABLE: Enables stand by screen.
 2. Compile Project.
 
-### 3.7 Upload Code on FRDM-MCXN947
-- Select project
-[<p align="center"><img src="Media/UploadCodeToBoard/step1.png" width="600"/></p>](Media/UploadCodeToBoard/step1.png)
-- Click on debug buttom to compile and upload code to board
-[<p align="center"><img src="Media/UploadCodeToBoard/step2.png" width="600"/></p>](Media/UploadCodeToBoard/step2.png)
+### 3.6 Flash the FRDM-MCXN947 Application
+1. Connect FRDM-MCXN947 to computer with USB-C cable in J17.
+2. Open MCUXpresso extension in VSCode.
+3. Select the project "dm-ip-frdmmcxn947-eth-panel".
+4. Expand project and expand "Project Files" option
+5. Open CMakePresets.json
+6. Open Windows File Explorer and go to path, see your version of ".venv_3_13"
+```
+C:/Users/%YourUserName%/.mcuxpressotools/
+```
+7. Replace version in CMakePresets.json in section of "configurePresets" -> "cacheVariables" -> "Python3_EXECUTABLE"
+```
+        "Python3_EXECUTABLE": {
+          "type": "FILEPATH",
+          "value": "$env{ARMGCC_DIR}/../.venv_3_13/Scripts/python.exe"
+        }
+```
+8. Do right click on project and select pristine build and wait about a one minute.
+9. Click run (play icon).
+10. Please wait a few seconds.
+11. Now click stop in center upper button.
+12. Disconnect USB-C cable of the board
 
-### 3.8 Connect Motor Control Shield
+### 3.7 Connect Motor Control Shield
 1. Connect wires of motor
 2. Connect Power Supply 24vDC, 5Amp
 
-### 3.9 Restart Board
+### 3.8 Start demo
+1. Connect again USB-C cable.
 
 ### 3.10 Connect panels
 - Connect main panel to interface panel with ethernet cable, or connect both into a modem or swithch (Optional)
@@ -196,9 +206,9 @@ Questions regarding the content/correctness of this example can be entered as Is
 [![Follow us on Twitter](https://img.shields.io/badge/X-Follow%20us%20on%20X-black.svg)](https://x.com/NXP)
 
 ## 5. Release Notes<a name="step5"></a>
-| Version | Description / Update                           | Date                        |
-|:-------:|------------------------------------------------|----------------------------:|
-| 1.0     | Initial release on Application Code Hub        | May 7 <sup>th</sup> 2025 |
+| Version | Description / Update                           | Date                           |
+|:-------:|------------------------------------------------|-------------------------------:|
+| 1.0     | Initial release on Application Code Hub        | February 28 <sup>th</sup> 2026 |
 
 ## Licensing
 

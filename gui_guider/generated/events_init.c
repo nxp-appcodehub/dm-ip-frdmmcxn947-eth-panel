@@ -1,5 +1,5 @@
 /*
-* Copyright 2025 NXP
+* Copyright 2025-2026 NXP
 * NXP Proprietary. This software is owned or controlled by NXP and may only be used strictly in
 * accordance with the applicable license terms. By expressly accepting such terms or by downloading, installing,
 * activating and/or otherwise using the software, you are agreeing that you have read, and that you agree to
@@ -77,7 +77,7 @@ void events_init_init_screen(lv_ui *ui)
 
 
 // Common Screen Events of ip --------------------------------
-void SaveBTN_sceen_event_handler(lv_event_t *e)
+void SaveBTN_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -86,7 +86,7 @@ void SaveBTN_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void IPMask1_sceen_event_handler(lv_event_t *e)
+void IPMask1_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -95,7 +95,7 @@ void IPMask1_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void IPMask2_sceen_event_handler(lv_event_t *e)
+void IPMask2_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -104,7 +104,7 @@ void IPMask2_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void IPMask3_sceen_event_handler(lv_event_t *e)
+void IPMask3_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -113,7 +113,7 @@ void IPMask3_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void IPMask4_sceen_event_handler(lv_event_t *e)
+void IPMask4_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -122,7 +122,7 @@ void IPMask4_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N0Btn_sceen_event_handler(lv_event_t *e)
+void N0Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -131,7 +131,7 @@ void N0Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N1Btn_sceen_event_handler(lv_event_t *e)
+void N1Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -140,7 +140,7 @@ void N1Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N2Btn_sceen_event_handler(lv_event_t *e)
+void N2Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -149,7 +149,7 @@ void N2Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N3Btn_sceen_event_handler(lv_event_t *e)
+void N3Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -158,7 +158,7 @@ void N3Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N4Btn_sceen_event_handler(lv_event_t *e)
+void N4Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -167,7 +167,7 @@ void N4Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N5Btn_sceen_event_handler(lv_event_t *e)
+void N5Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -176,7 +176,7 @@ void N5Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N6Btn_sceen_event_handler(lv_event_t *e)
+void N6Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -185,7 +185,7 @@ void N6Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N7Btn_sceen_event_handler(lv_event_t *e)
+void N7Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -194,7 +194,7 @@ void N7Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N8Btn_sceen_event_handler(lv_event_t *e)
+void N8Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -203,7 +203,7 @@ void N8Btn_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void N9Btn_sceen_event_handler(lv_event_t *e)
+void N9Btn_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -217,7 +217,7 @@ void N9Btn_sceen_event_handler(lv_event_t *e)
 
 
 // ConnectionConfig Screen Events ----------------------------
-void connectionConfig_sceen_event_handler(lv_event_t *e)
+void connectionConfig_screen_event_handler(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
@@ -226,44 +226,44 @@ void connectionConfig_sceen_event_handler(lv_event_t *e)
     }
 }
 
-void dhcpSelected_sceen_event_handler(lv_event_t *e)
+void connection_config_screen_static_ip_check_box_event_handler (lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-    if(code == LV_EVENT_CLICKED)
-    {
-    	g_callback(k_screen_dhcp_selected_event);
-    }
-}
+	uint8_t checkbox_val = 0;
 
-void staticSelected_sceen_event_handler(lv_event_t *e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    if(code == LV_EVENT_CLICKED)
+    switch (code) {
+    case LV_EVENT_RELEASED:
     {
-    	g_callback(k_screen_static_selected_event);
+        lv_obj_t * status_obj = lv_event_get_target(e);
+        checkbox_val = lv_obj_get_state(status_obj) & LV_STATE_CHECKED ? true : false;
+		if(checkbox_val) g_callback(k_screen_static_selected_event);
+		else			 g_callback(k_screen_dhcp_selected_event);
+        break;
+    }
+    default:
+        break;
     }
 }
 
 void events_init_connection_config_screen(lv_ui *ui)
 {
-    lv_obj_add_event_cb(ui->connection_config_screen, connectionConfig_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_ConnectionModeRad_item0, dhcpSelected_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_ConnectionModeRad_item1, staticSelected_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf1, IPMask1_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf2, IPMask2_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf3, IPMask3_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf4, IPMask4_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_SaveIPBTN, SaveBTN_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N0Btn, N0Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N1Btn, N1Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N2Btn, N2Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N3Btn, N3Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N4Btn, N4Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N5Btn, N5Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N6Btn, N6Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N7Btn, N7Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N8Btn, N8Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->connection_config_screen_N9Btn, N9Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen, connectionConfig_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_static_ip_check_box, connection_config_screen_static_ip_check_box_event_handler, LV_EVENT_ALL, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf1, IPMask1_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf2, IPMask2_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf3, IPMask3_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_IPCnf4, IPMask4_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_SaveIPBTN, SaveBTN_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N0Btn, N0Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N1Btn, N1Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N2Btn, N2Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N3Btn, N3Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N4Btn, N4Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N5Btn, N5Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N6Btn, N6Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N7Btn, N7Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N8Btn, N8Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->connection_config_screen_N9Btn, N9Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
 }
 // -----------------------------------------------------------
 
@@ -273,22 +273,22 @@ void events_init_connection_config_screen(lv_ui *ui)
 // ServerIP Screen Events ------------------------------------
 void events_init_server_ip_screen(lv_ui *ui)
 {
-    lv_obj_add_event_cb(ui->server_ip_screen, connectionConfig_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf1, IPMask1_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf2, IPMask2_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf3, IPMask3_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf4, IPMask4_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_SaveIPBTN, SaveBTN_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N0Btn, N0Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N1Btn, N1Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N2Btn, N2Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N3Btn, N3Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N4Btn, N4Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N5Btn, N5Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N6Btn, N6Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N7Btn, N7Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N8Btn, N8Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
-    lv_obj_add_event_cb(ui->server_ip_screen_N9Btn, N9Btn_sceen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen, connectionConfig_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf1, IPMask1_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf2, IPMask2_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf3, IPMask3_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_IPCnf4, IPMask4_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_SaveIPBTN, SaveBTN_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N0Btn, N0Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N1Btn, N1Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N2Btn, N2Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N3Btn, N3Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N4Btn, N4Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N5Btn, N5Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N6Btn, N6Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N7Btn, N7Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N8Btn, N8Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
+    lv_obj_add_event_cb(ui->server_ip_screen_N9Btn, N9Btn_screen_event_handler, LV_EVENT_CLICKED, ui);
 }
 // -----------------------------------------------------------
 

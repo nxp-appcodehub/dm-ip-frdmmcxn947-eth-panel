@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 NXP
+ * Copyright 2025-2026 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -14,6 +14,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
+#include "fsl_gpio.h"
 
 #define CHAR_TO_INT -48
 #define INT_TO_CHAR 48
@@ -205,17 +206,13 @@ void screen_setConnectionMode(screen_ip_mode_t mode)
 {
 	if(g_actual_screen == k_connection_config_screen)
 	{
-		lv_obj_clear_state(guider_ui.connection_config_screen_ConnectionModeRad_item0, LV_STATE_PRESSED | LV_STATE_CHECKED);
-		lv_obj_clear_state(guider_ui.connection_config_screen_ConnectionModeRad_item1, LV_STATE_PRESSED | LV_STATE_CHECKED);
 		if(mode == k_screen_dhcp)
 		{
-			lv_obj_add_state(guider_ui.connection_config_screen_ConnectionModeRad_item0, LV_STATE_CHECKED);
-			lv_obj_add_state(guider_ui.connection_config_screen_ConnectionModeRad_item1, LV_STATE_DEFAULT);
+			lv_obj_set_state(guider_ui.connection_config_screen_static_ip_check_box, LV_STATE_CHECKED, false);
 		}
 		else
 		{
-			lv_obj_add_state(guider_ui.connection_config_screen_ConnectionModeRad_item0, LV_STATE_DEFAULT);
-			lv_obj_add_state(guider_ui.connection_config_screen_ConnectionModeRad_item1, LV_STATE_CHECKED);
+			lv_obj_set_state(guider_ui.connection_config_screen_static_ip_check_box, LV_STATE_CHECKED, true);
 		}
 	}
 }
@@ -374,7 +371,7 @@ void screen_setMCUTemp(float32_t temp)
 		case k_temperature_screen:
 			lv_label_set_text(guider_ui.temperature_measure_screen_MCUTempLabel, new_string);
 			lv_label_set_text(guider_ui.temperature_measure_screen_MCUTempScreenLabel, new_string);
-			lv_meter_set_indicator_value(guider_ui.temperature_measure_screen_MCUTempMeter, guider_ui.temperature_measure_screen_MCUTempMeter_scale_0_ndline_0, (int32_t)temp_int);
+    		lv_scale_set_line_needle_value(guider_ui.temperature_measure_screen_MCUTempMeter, guider_ui.temperature_measure_screen_MCUTempMeter_ndline_0, 75, (int32_t)temp_int);
 		break;
 		case k_accelerometer_screen:
 			lv_label_set_text(guider_ui.accelerometer_measure_screen_MCUTempLabel, new_string);
@@ -424,7 +421,7 @@ void screen_setBRDTemp(float32_t temp)
 		case k_temperature_screen:
 			lv_label_set_text(guider_ui.temperature_measure_screen_BRDTempLabel, new_string);
 			lv_label_set_text(guider_ui.temperature_measure_screen_BRDTempScreenLabel, new_string);
-			lv_meter_set_indicator_value(guider_ui.temperature_measure_screen_BRDTempMeter, guider_ui.temperature_measure_screen_BRDTempMeter_scale_0_ndline_0, (int32_t)temp_int);
+    		lv_scale_set_line_needle_value(guider_ui.temperature_measure_screen_BRDTempMeter, guider_ui.temperature_measure_screen_BRDTempMeter_ndline_0, 75, (int32_t)temp_int);
 		break;
 		case k_accelerometer_screen:
 			lv_label_set_text(guider_ui.accelerometer_measure_screen_BRDTempLabel, new_string);
@@ -753,4 +750,10 @@ void screenTick(void)
     {
         lv_tick_inc(1);
     }
+}
+
+void GPIO40_IRQHandler(void)
+{
+	BOARD_TouchIntHandler();
+	GPIO_GpioClearInterruptFlags(GPIO4, 1U << 6);
 }

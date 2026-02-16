@@ -5,3 +5,4 @@ DEPPATH += --dep-path $(PRJ_DIR)/custom
 VPATH += :$(PRJ_DIR)/custom
 
 CFLAGS += "-I$(PRJ_DIR)/custom"
+AFLAGS += "-I$(PRJ_DIR)/custom"

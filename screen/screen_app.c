@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 NXP
+ * Copyright 2025-2026 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -163,7 +163,7 @@ void brd_temperature_update(screen_app_mode_t mode)
 	{
 		temperature = g_comunication_data->comunication_data.comunication_temperature.comunication_brd_temperature;
 	}
-	screen_setBRDTemp(temperature);
+	//screen_setBRDTemp(temperature);
 }
 
 void mcu_temperature_update(screen_app_mode_t mode)
@@ -178,6 +178,7 @@ void mcu_temperature_update(screen_app_mode_t mode)
 		temperature = g_comunication_data->comunication_data.comunication_temperature.comunication_mcu_temperature;
 	}
 	screen_setMCUTemp(temperature);
+	screen_setBRDTemp(temperature);
 }
 
 void date_update(screen_app_mode_t mode)

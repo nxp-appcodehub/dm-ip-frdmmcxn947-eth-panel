@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 NXP
+ * Copyright 2023 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -24,17 +24,18 @@
 /* clang-format off */
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Clocks v11.0
+product: Clocks v12.0
 processor: MCXN947
 package_id: MCXN947VDF
 mcu_data: ksdk2_0
-processor_version: 0.13.10
+processor_version: 0.14.16
 board: FRDM-MCXN947
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 
 #include "fsl_clock.h"
 #include "clock_config.h"
+#include "fsl_spc.h"
 
 /*******************************************************************************
  * Definitions
@@ -90,10 +91,31 @@ void BOARD_BootClockFRO12M(void)
 {
     CLOCK_EnableClock(kCLOCK_Scg);                     /*!< Enable SCG clock */
 
-    CLOCK_SetFLASHAccessCyclesForFreq(12000000U, kOD_Mode);           /*!< Set the additional number of flash wait-states */
+    /* FRO OSC setup - begin, attach FRO12M to MainClock for safety switching */
+    CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);              /*!< Switch to FRO 12M first to ensure we can change the clock setting */
 
-    /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);                 /*!< Switch MAIN_CLK to FRO12M */
+    /* Set the DCDC VDD regulator to 1.2 V voltage level */
+    spc_active_mode_dcdc_option_t dcdcOpt = {
+      .DCDCVoltage       = kSPC_DCDC_OverdriveVoltage,
+      .DCDCDriveStrength = kSPC_DCDC_NormalDriveStrength,
+    };
+    SPC_SetActiveModeDCDCRegulatorConfig(SPC0, &dcdcOpt);
+    /* Set the LDO_CORE VDD regulator to 1.2 V voltage level */
+    spc_active_mode_core_ldo_option_t ldoOpt = {
+      .CoreLDOVoltage       = kSPC_CoreLDO_OverDriveVoltage,
+      .CoreLDODriveStrength = kSPC_CoreLDO_NormalDriveStrength,
+    };
+    SPC_SetActiveModeCoreLDORegulatorConfig(SPC0, &ldoOpt);
+    /* Configure Flash wait-states to support 1.2V voltage level and 12000000Hz frequency */;
+    FMU0->FCTRL = (FMU0->FCTRL & ~((uint32_t)FMU_FCTRL_RWSC_MASK)) | (FMU_FCTRL_RWSC(0x0U));
+    /* Specifies the 1.2V operating voltage for the SRAM's read/write timing margin */
+    spc_sram_voltage_config_t sramCfg = {
+      .operateVoltage       = kSPC_sramOperateAt1P2V,
+      .requestVoltageUpdate = true,
+    };
+    SPC_SetSRAMOperateVoltage(SPC0, &sramCfg);
+
+    /*!< Set up clock selectors  */
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U);           /*!< Set AHBCLKDIV divider to value 1 */
@@ -137,14 +159,33 @@ void BOARD_BootClockFROHF48M(void)
 {
     CLOCK_EnableClock(kCLOCK_Scg);                     /*!< Enable SCG clock */
 
-    /* FRO OSC setup - begin, enable the FRO for safety switching */
+    /* FRO OSC setup - begin, attach FRO12M to MainClock for safety switching */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);              /*!< Switch to FRO 12M first to ensure we can change the clock setting */
 
-    CLOCK_SetFLASHAccessCyclesForFreq(48000000U, kOD_Mode);           /*!< Set the additional number of flash wait-states */
+    /* Set the DCDC VDD regulator to 1.2 V voltage level */
+    spc_active_mode_dcdc_option_t dcdcOpt = {
+      .DCDCVoltage       = kSPC_DCDC_OverdriveVoltage,
+      .DCDCDriveStrength = kSPC_DCDC_NormalDriveStrength,
+    };
+    SPC_SetActiveModeDCDCRegulatorConfig(SPC0, &dcdcOpt);
+    /* Set the LDO_CORE VDD regulator to 1.2 V voltage level */
+    spc_active_mode_core_ldo_option_t ldoOpt = {
+      .CoreLDOVoltage       = kSPC_CoreLDO_OverDriveVoltage,
+      .CoreLDODriveStrength = kSPC_CoreLDO_NormalDriveStrength,
+    };
+    SPC_SetActiveModeCoreLDORegulatorConfig(SPC0, &ldoOpt);
+    /* Configure Flash wait-states to support 1.2V voltage level and 48000000Hz frequency */;
+    FMU0->FCTRL = (FMU0->FCTRL & ~((uint32_t)FMU_FCTRL_RWSC_MASK)) | (FMU_FCTRL_RWSC(0x1U));
+    /* Specifies the 1.2V operating voltage for the SRAM's read/write timing margin */
+    spc_sram_voltage_config_t sramCfg = {
+      .operateVoltage       = kSPC_sramOperateAt1P2V,
+      .requestVoltageUpdate = true,
+    };
+    SPC_SetSRAMOperateVoltage(SPC0, &sramCfg);
 
     CLOCK_SetupFROHFClocking(48000000U);               /*!< Enable FRO HF(48MHz) output */
-    /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kFRO_HF_to_MAIN_CLK);                 /*!< Switch MAIN_CLK to FRO_HF */
+    /*!< Set up clock selectors  */
+    CLOCK_AttachClk(kFRO_HF_to_MAIN_CLK);
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U);           /*!< Set AHBCLKDIV divider to value 1 */
@@ -191,14 +232,33 @@ void BOARD_BootClockFROHF144M(void)
 {
     CLOCK_EnableClock(kCLOCK_Scg);                     /*!< Enable SCG clock */
 
-    /* FRO OSC setup - begin, enable the FRO for safety switching */
+    /* FRO OSC setup - begin, attach FRO12M to MainClock for safety switching */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);              /*!< Switch to FRO 12M first to ensure we can change the clock setting */
 
-    CLOCK_SetFLASHAccessCyclesForFreq(144000000U, kOD_Mode);           /*!< Set the additional number of flash wait-states */
+    /* Set the DCDC VDD regulator to 1.2 V voltage level */
+    spc_active_mode_dcdc_option_t dcdcOpt = {
+      .DCDCVoltage       = kSPC_DCDC_OverdriveVoltage,
+      .DCDCDriveStrength = kSPC_DCDC_NormalDriveStrength,
+    };
+    SPC_SetActiveModeDCDCRegulatorConfig(SPC0, &dcdcOpt);
+    /* Set the LDO_CORE VDD regulator to 1.2 V voltage level */
+    spc_active_mode_core_ldo_option_t ldoOpt = {
+      .CoreLDOVoltage       = kSPC_CoreLDO_OverDriveVoltage,
+      .CoreLDODriveStrength = kSPC_CoreLDO_NormalDriveStrength,
+    };
+    SPC_SetActiveModeCoreLDORegulatorConfig(SPC0, &ldoOpt);
+    /* Configure Flash wait-states to support 1.2V voltage level and 144000000Hz frequency */;
+    FMU0->FCTRL = (FMU0->FCTRL & ~((uint32_t)FMU_FCTRL_RWSC_MASK)) | (FMU_FCTRL_RWSC(0x3U));
+    /* Specifies the 1.2V operating voltage for the SRAM's read/write timing margin */
+    spc_sram_voltage_config_t sramCfg = {
+      .operateVoltage       = kSPC_sramOperateAt1P2V,
+      .requestVoltageUpdate = true,
+    };
+    SPC_SetSRAMOperateVoltage(SPC0, &sramCfg);
 
     CLOCK_SetupFROHFClocking(144000000U);               /*!< Enable FRO HF(144MHz) output */
-    /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kFRO_HF_to_MAIN_CLK);                 /*!< Switch MAIN_CLK to FRO_HF */
+    /*!< Set up clock selectors  */
+    CLOCK_AttachClk(kFRO_HF_to_MAIN_CLK);
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U);           /*!< Set AHBCLKDIV divider to value 1 */
@@ -250,10 +310,29 @@ void BOARD_BootClockPLL150M(void)
 {
     CLOCK_EnableClock(kCLOCK_Scg);                     /*!< Enable SCG clock */
 
-    /* FRO OSC setup - begin, enable the FRO for safety switching */
+    /* FRO OSC setup - begin, attach FRO12M to MainClock for safety switching */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);              /*!< Switch to FRO 12M first to ensure we can change the clock setting */
 
-    CLOCK_SetFLASHAccessCyclesForFreq(150000000U, kOD_Mode);           /*!< Set the additional number of flash wait-states */
+    /* Set the DCDC VDD regulator to 1.2 V voltage level */
+    spc_active_mode_dcdc_option_t dcdcOpt = {
+      .DCDCVoltage       = kSPC_DCDC_OverdriveVoltage,
+      .DCDCDriveStrength = kSPC_DCDC_NormalDriveStrength,
+    };
+    SPC_SetActiveModeDCDCRegulatorConfig(SPC0, &dcdcOpt);
+    /* Set the LDO_CORE VDD regulator to 1.2 V voltage level */
+    spc_active_mode_core_ldo_option_t ldoOpt = {
+      .CoreLDOVoltage       = kSPC_CoreLDO_OverDriveVoltage,
+      .CoreLDODriveStrength = kSPC_CoreLDO_NormalDriveStrength,
+    };
+    SPC_SetActiveModeCoreLDORegulatorConfig(SPC0, &ldoOpt);
+    /* Configure Flash wait-states to support 1.2V voltage level and 150000000Hz frequency */;
+    FMU0->FCTRL = (FMU0->FCTRL & ~((uint32_t)FMU_FCTRL_RWSC_MASK)) | (FMU_FCTRL_RWSC(0x3U));
+    /* Specifies the 1.2V operating voltage for the SRAM's read/write timing margin */
+    spc_sram_voltage_config_t sramCfg = {
+      .operateVoltage       = kSPC_sramOperateAt1P2V,
+      .requestVoltageUpdate = true,
+    };
+    SPC_SetSRAMOperateVoltage(SPC0, &sramCfg);
 
     CLOCK_SetupFROHFClocking(48000000U);               /*!< Enable FRO HF(48MHz) output */
     /*!< Set up PLL0 */
@@ -267,8 +346,8 @@ void BOARD_BootClockPLL150M(void)
     CLOCK_SetPLL0Freq(&pll0Setup);                       /*!< Configure PLL0 to the desired values */
     CLOCK_SetPll0MonitorMode(kSCG_Pll0MonitorDisable);    /* Pll0 Monitor is disabled */
 
-    /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kPLL0_to_MAIN_CLK);                 /*!< Switch MAIN_CLK to PLL0 */
+    /*!< Set up clock selectors  */
+    CLOCK_AttachClk(kPLL0_to_MAIN_CLK);
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U);           /*!< Set AHBCLKDIV divider to value 1 */
@@ -322,12 +401,31 @@ void BOARD_BootClockPLL100M(void)
 {
     CLOCK_EnableClock(kCLOCK_Scg);                     /*!< Enable SCG clock */
 
-    /* FRO OSC setup - begin, enable the FRO for safety switching */
+    /* FRO OSC setup - begin, attach FRO12M to MainClock for safety switching */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);              /*!< Switch to FRO 12M first to ensure we can change the clock setting */
 
-    CLOCK_SetFLASHAccessCyclesForFreq(100000000U, kOD_Mode);           /*!< Set the additional number of flash wait-states */
+    /* Set the DCDC VDD regulator to 1.2 V voltage level */
+    spc_active_mode_dcdc_option_t dcdcOpt = {
+      .DCDCVoltage       = kSPC_DCDC_OverdriveVoltage,
+      .DCDCDriveStrength = kSPC_DCDC_NormalDriveStrength,
+    };
+    SPC_SetActiveModeDCDCRegulatorConfig(SPC0, &dcdcOpt);
+    /* Set the LDO_CORE VDD regulator to 1.2 V voltage level */
+    spc_active_mode_core_ldo_option_t ldoOpt = {
+      .CoreLDOVoltage       = kSPC_CoreLDO_OverDriveVoltage,
+      .CoreLDODriveStrength = kSPC_CoreLDO_NormalDriveStrength,
+    };
+    SPC_SetActiveModeCoreLDORegulatorConfig(SPC0, &ldoOpt);
+    /* Configure Flash wait-states to support 1.2V voltage level and 100000000Hz frequency */;
+    FMU0->FCTRL = (FMU0->FCTRL & ~((uint32_t)FMU_FCTRL_RWSC_MASK)) | (FMU_FCTRL_RWSC(0x2U));
+    /* Specifies the 1.2V operating voltage for the SRAM's read/write timing margin */
+    spc_sram_voltage_config_t sramCfg = {
+      .operateVoltage       = kSPC_sramOperateAt1P2V,
+      .requestVoltageUpdate = true,
+    };
+    SPC_SetSRAMOperateVoltage(SPC0, &sramCfg);
 
-    CLOCK_SetupExtClocking(24000000U);
+    CLOCK_SetupExtRefClocking(24000000U);
     CLOCK_SetSysOscMonitorMode(kSCG_SysOscMonitorDisable);    /* System OSC Clock Monitor is disabled */
 
     /*!< Set up PLL1 */
@@ -341,8 +439,8 @@ void BOARD_BootClockPLL100M(void)
     CLOCK_SetPLL1Freq(&pll1Setup);                       /*!< Configure PLL1 to the desired values */
     CLOCK_SetPll1MonitorMode(kSCG_Pll1MonitorDisable);    /* Pll1 Monitor is disabled */
 
-    /*!< Set up clock selectors - Attach clocks to the peripheries */
-    CLOCK_AttachClk(kPLL1_to_MAIN_CLK);                 /*!< Switch MAIN_CLK to PLL1 */
+    /*!< Set up clock selectors  */
+    CLOCK_AttachClk(kPLL1_to_MAIN_CLK);
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U);           /*!< Set AHBCLKDIV divider to value 1 */

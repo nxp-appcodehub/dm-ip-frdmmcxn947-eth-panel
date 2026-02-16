@@ -1,13 +1,11 @@
 Release Name:           dm_ip_frdmmcxn947_eth_panel
-Release Version:        1.0
-Outgoing License:       LA_OPT_Online Code Hosting NXP_Software_License - v1.3 December 2024
-licence in files:       Licence.txt
-Description:            Industrial connectivity panel is a improved version, with new features, improved graphics and performance. Demo has LCD for graphics, motor control, temperature sensors, accelerometer (Mikroe Accel4Click), core performance and RTC.
+Release Version:        2.0
+Outgoing License:       LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025
+license in files:       License.txt
+Description:            Industrial connectivity panel is a improved version, with new features, improved graphics and performance. 
+                        Demo has LCD for graphics, motor control, temperature sensors, accelerometer (Mikroe Accel4Click), 
+                        core performance and RTC.
 Release location:       https://github.com/nxp-appcodehub/dm_ip_frdmmcxn947_eth_panel
 Origin:                 NXP (BSD-3-clause)
                         NXP (Proprietary)
-                        ARM CMSIS v6.1.0 (Apache-2.0) - https://github.com/ARM-software/CMSIS_6/releases/tag/v6.1.0
-                        Amazon FreeRTOS v11.0.1 (MIT) - https://github.com/FreeRTOS/FreeRTOS-Kernel
-                        lvgl v8.3.10 (MIT) - https://github.com/lvgl/lvgl
                         Montserrat Medium font (OFL-1.1) - https://github.com/JulietaUla/Montserrat
-                        lwip v2024-02-19 (BSD-3-clause) - http://savannah.nongnu.org/projects/lwip

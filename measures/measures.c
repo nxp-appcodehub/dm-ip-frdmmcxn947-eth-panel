@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 NXP
+ * Copyright 2025-2026 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -11,7 +11,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "fsl_mrt.h"
-#include "fsl_p3t1755.h"
+#include "brd_temp_sensor.h"
 #include "fsl_lpadc.h"
 #include "fsl_vref.h"
 #include "fsl_irtc.h"

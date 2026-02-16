@@ -1,0 +1,35 @@
+/*
+ * Copyright 2024-2026 NXP
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+#ifndef MOTOR_CONTROL_H_
+#define MOTOR_CONTROL_H_
+
+#include <stdint.h>
+#include <stdbool.h>
+
+#include "mc_periph_init.h"
+#include "pin_mux.h"
+#include "fsl_port.h"
+#include "fsl_device_registers.h"
+#include "m1_sm_snsless_enc.h"
+#include "clock_config.h"
+#include "board.h"
+#include "mid_sm_states.h"
+#include "arm_math.h"
+
+void motor_control_init();
+
+void motor_control_task();
+
+void motor_control_set_speed(int32_t rpm);
+
+float32_t motor_control_get_speed();
+
+void motor_control_run();
+
+void motor_control_stop();
+
+#endif /* MOTOR_CONTROL_H_ */
